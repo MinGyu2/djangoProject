@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xmf6t@y2l=$u!nnr6c%d7b&k6keunztk!a7n6f503zmqel-so)
 DEBUG = False
 
 #ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', '39.112.211.207', 'mqhome.ipdisk.co.kr']
-ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', 'mqhome.ipdisk.co.kr']
+ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', '39.112.211.207', 'mqhome.ipdisk.co.kr']
 
 
 # Application definition
