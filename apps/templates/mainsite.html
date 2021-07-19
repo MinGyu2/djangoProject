@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stylebox.css' %}">
+</head>
+<body>
+    <div class="main_container">
+        {#메뉴#}
+        <div class="col_left_container">
+            <div class="menu_container" style="color:#007bff" onclick="location.href='{% url 'index' %}'"><a>스마트 햄토리</a></div>
+            <div class="menu_container"><a>설비 조회</a></div>
+            <div class="menu_container"><a>관리자 위치</a></div>
+            <div class="menu_container"><a>에러 로그</a></div>
+            <div class="menu_container"><a>직원 DB</a></div>
+        </div>
+        <div class="col_right_container">
+            <div class="row_top_container"></div>
+            <div class="row_bottom_container">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
