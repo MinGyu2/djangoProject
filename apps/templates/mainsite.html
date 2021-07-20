@@ -13,13 +13,20 @@
         {#메뉴#}
         <div class="col_left_container">
             <div class="menu_container" style="color:#007bff" onclick="location.href='{% url 'index' %}'"><a>스마트 햄토리</a></div>
-            <div class="menu_container"><a>설비 조회</a></div>
-            <div class="menu_container"><a>관리자 위치</a></div>
-            <div class="menu_container"><a>에러 로그</a></div>
-            <div class="menu_container"><a>직원 DB</a></div>
+            {% for menu,n in menu_list %}
+                {% if menu != select_menu %}
+                    <div class="menu_container" onclick="location.href='{% url 'detail' num=n %}'" ><a>{{ menu }}</a></div>
+                {% else %}
+                    <div class="menu_container_selected" ><a>{{ menu }}</a></div>
+                {% endif %}
+            {% endfor %}
+{#            <div class="menu_container" ><a>설비 조회</a></div>#}
+{#            <div class="menu_container"><a>관리자 위치</a></div>#}
+{#            <div class="menu_container"><a>에러 로그</a></div>#}
+{#            <div class="menu_container"><a>직원 DB</a></div>#}
         </div>
         <div class="col_right_container">
-            <div class="row_top_container"></div>
+            <div class="row_top_container"><a>{{ select_menu }}</a></div>
             <div class="row_bottom_container">
             </div>
         </div>
