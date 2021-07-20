@@ -17,7 +17,7 @@
                 {% if menu != select_menu %}
                     <div class="menu_container" onclick="location.href='{% url 'detail' num=n %}'" ><a>{{ menu }}</a></div>
                 {% else %}
-                    <div class="menu_container" ><a>{{ menu }}</a></div>
+                    <div class="menu_container_selected" ><a>{{ menu }}</a></div>
                 {% endif %}
             {% endfor %}
 {#            <div class="menu_container" ><a>설비 조회</a></div>#}
