@@ -12,10 +12,10 @@
     <div class="main_container">
         {#메뉴#}
         <div class="col_left_container">
-            <div class="menu_container" style="color:#007bff" onclick="location.href='{% url 'index' %}'"><a>스마트 햄토리</a></div>
+            <div class="menu_container" style="color:#007bff" onclick="location.href='{% url 'mainpage' %}'"><a>스마트 햄토리</a></div>
             {% for menu,n in menu_list %}
                 {% if menu != select_menu %}
-                    <div class="menu_container" onclick="location.href='{% url 'detail' num=n %}'" ><a>{{ menu }}</a></div>
+                    <div class="menu_container" onclick="location.href='{% url 'mainpage_menuselect' num=n %}'" ><a>{{ menu }}</a></div>
                 {% else %}
                     <div class="menu_container_selected" ><a>{{ menu }}</a></div>
                 {% endif %}

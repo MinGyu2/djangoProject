@@ -5,7 +5,7 @@ from django.shortcuts import render
 from .models import Error   # db 접근
 
 menu_list = ['설비 조회', '관리자 위치', '에러 로그', '직원 DB']
-def index(request):
+def mainpage(request):
     num_errors = Error.objects.all().count()
     context = {
         # 'num_errors': num_errors,
@@ -15,7 +15,7 @@ def index(request):
     # return HttpResponse("Hellow world!!123")
     return render(request, 'mainsite.html', context=context)
 
-def detail(request,num):
+def mainpage_menuselect(request,num):
     if num > 4 or num < 1:
         return HttpResponseRedirect('/apps/')
     context = {
@@ -23,3 +23,4 @@ def detail(request,num):
         'select_menu': menu_list[num-1],
     }
     return render(request, 'mainsite.html', context=context)
+
