@@ -24,3 +24,5 @@ def mainpage_menuselect(request,num):
     }
     return render(request, 'mainsite.html', context=context)
 
+def click_menu(request):
+    return render(request, 'only_menu.html')
