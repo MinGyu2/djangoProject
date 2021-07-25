@@ -22,7 +22,4 @@ def mainpage_menuselect(request,num):
         'menu_list': zip(menu_list, [1, 2, 3, 4]),
         'select_menu': menu_list[num-1],
     }
-    return render(request, 'mainsite.html', context=context)
-
-def click_menu(request):
-    return render(request, 'only_menu.html')
+    return render(request, 'menu/menu_'+str(num)+'.html', context=context)
