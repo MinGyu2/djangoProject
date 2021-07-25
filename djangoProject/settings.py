@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-xmf6t@y2l=$u!nnr6c%d7b&k6keunztk!a7n6f503zmqel-so)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-# DEBUG = True
+#DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', '39.112.211.207', 'mqhome.ipdisk.co.kr']
 ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', 'mqhome.ipdisk.co.kr']
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps',
+    'common',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#================================ edit ==========================================
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+#================================================================================
