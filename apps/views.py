@@ -28,7 +28,9 @@ def mainpage_menuselect(request,num):
         context = {}
         if num == 1:    # menu_1.html
             w = 0
-            item_of_list = [[('무게1', w), ('test1', 3)],
+            num_value = request.session.get('weight_value', 0)
+            request.session['weight_value'] = num_value+1
+            item_of_list = [[('무게1', num_value), ('test1', 3)],
                             [('무게2', w), ('test2', 4)],
                             [('무게3', w), ('test3', 5)],
                             [('무게4', w), ('test4', 6)]]
@@ -37,6 +39,8 @@ def mainpage_menuselect(request,num):
                             [1, 2, 3, 4],
                             item_of_list),
             }
+        elif num == 2:
+            del request.session['weight_value']
         return render(request, 'menu/menu_'+str(num)+'.html', context=context)
     else:
         return redirect('login')

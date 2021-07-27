@@ -7,6 +7,7 @@ $(document).ready(function () {
         $("#click_menu_4").attr('class','menu_container');
         $("#title_select_menu").html('<a>설비 조회</a>');
         Ajaxfun.call_site(1);
+        clearInterval(timer);
         timer = setInterval(Ajaxfun.call_site,3000,1);
     });
     $("#click_menu_2").click(function() {
@@ -48,5 +49,6 @@ $(document).ready(function () {
         }
     }
     Ajaxfun.call_site(1);
-    timer = setInterval(Ajaxfun.call_site,1000,1);
+    clearInterval(timer);
+    timer = setInterval(Ajaxfun.call_site,3000,1);
 })
