@@ -28,7 +28,11 @@ def mainpage_menuselect(request,num):
         if num == 1:    # menu_1.html
             w = 0
             num_value = request.session.get('weight_value', 0)
-            cache.set('tetet', cache.get('tetet', 0)+1)
+
+            vvv = cache.get('tetet', 0)
+            cache.delete('tetet')
+            cache.set('tetet', vvv+1)
+
             request.session['weight_value'] = num_value+1
 
             item_of_list = [[('무게1', num_value), ('test1', 3)],
