@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
@@ -10,9 +11,7 @@ from .forms import UserForm, UserDelForm
 menu_list = ['설비 조회', '관리자 위치', '에러 로그', '직원 DB']
 def mainpage(request):
     if request.user.is_authenticated:
-        num_errors = Error.objects.all().count()
         context = {
-            # 'num_errors': num_errors,
             'menu_list': zip(menu_list, [1, 2, 3, 4]),
             'select_menu': menu_list[0],
         }
@@ -29,7 +28,9 @@ def mainpage_menuselect(request,num):
         if num == 1:    # menu_1.html
             w = 0
             num_value = request.session.get('weight_value', 0)
+            cache.set('tetet', cache.get('tetet', 0)+1)
             request.session['weight_value'] = num_value+1
+
             item_of_list = [[('무게1', num_value), ('test1', 3)],
                             [('무게2', w), ('test2', 4)],
                             [('무게3', w), ('test3', 5)],
@@ -40,7 +41,16 @@ def mainpage_menuselect(request,num):
                             item_of_list),
             }
         elif num == 2:
-            del request.session['weight_value']
+            # del request.session['weight_value']
+            context = {
+                'test': request.session['weight_value'],
+                'test2': cache.get('tetet', 0),
+            }
+        elif num == 3:
+            errors_num = Error.objects.all().count()
+            context = {
+                'errors_num': errors_num,
+            }
         return render(request, 'menu/menu_'+str(num)+'.html', context=context)
     else:
         return redirect('login')
