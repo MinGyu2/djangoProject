@@ -36,7 +36,7 @@ def mainpage_menuselect(request,num):
             request.session['weight_value'] = num_value+1
 
             item_of_list = [[('무게1', num_value), ('test1', 3)],
-                            [('무게2', w), ('test2', 4)],
+                            [('무게2', vvv), ('test2', 4)],
                             [('무게3', w), ('test3', 5)],
                             [('무게4', w), ('test4', 6)]]
             context = {
