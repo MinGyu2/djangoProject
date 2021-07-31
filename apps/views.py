@@ -30,8 +30,6 @@ def mainpage_menuselect(request,num):
             num_value = request.session.get('weight_value', 0)
 
             vvv = cache.get('tetet', 0)
-            cache.delete('tetet')
-            cache.set('tetet', vvv+1, 5000)
 
             request.session['weight_value'] = num_value+1
 
@@ -46,6 +44,10 @@ def mainpage_menuselect(request,num):
             }
         elif num == 2:
             # del request.session['weight_value']
+            vvv = cache.get('tetet', 0)
+            cache.delete('tetet')
+            cache.set('tetet', vvv + 1, 5000)
+
             context = {
                 'test': request.session['weight_value'],
                 'test2': cache.get('tetet', 0),
