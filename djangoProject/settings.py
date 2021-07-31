@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xmf6t@y2l=$u!nnr6c%d7b&k6keunztk!a7n6f503zmqel-so)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
-DEBUG = True
+DEBUG = False
+#DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', '39.112.211.207', 'mqhome.ipdisk.co.kr']
 ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', 'mqhome.ipdisk.co.kr']
@@ -143,8 +143,11 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': [
+            # 'redis://172.25.182.6:6379',
+            'redis://192.168.0.26:6379',
+        ]
     }
 }
 #================================================================================
