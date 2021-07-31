@@ -31,7 +31,7 @@ def mainpage_menuselect(request,num):
 
             vvv = cache.get('tetet', 0)
             cache.delete('tetet')
-            cache.set('tetet', vvv+1)
+            cache.set('tetet', vvv+1, 5000)
 
             request.session['weight_value'] = num_value+1
 
