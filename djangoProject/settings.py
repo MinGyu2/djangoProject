@@ -141,4 +141,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #================================ edit ==========================================
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 #================================================================================
