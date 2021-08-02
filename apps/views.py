@@ -61,7 +61,7 @@ def mainpage_menuselect(request,num):
             vvv = cache.get('tetet', 0)
 
             con = get_redis_connection("default")
-            
+
             u = User.objects.filter(last_name=equipment_last_name)
             context = {
                 'test': request.session['weight_value'],
@@ -73,14 +73,7 @@ def mainpage_menuselect(request,num):
             }
         elif num == 3:
             errors_num = Error.objects.all().count()
-            #i = Error(error_register_name='test1', error_equip_name='equip1', error_content='asdasdasdasd').save()
             items = Error.objects.order_by()
-            # Error.objects.get(pk=1)
-            #i = Error.objects.filter(error_register_name='test1')
-            #i.delete()
-            # ttt = authenticate(username='melon2', password='apple2357')
-            ttt = authenticate(username='admin', password='admin')
-            #i2.delete()
             context = {
                 'errors_num': errors_num,
                 'items': items,
