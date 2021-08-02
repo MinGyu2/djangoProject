@@ -58,20 +58,17 @@ def mainpage_menuselect(request,num):
             }
         elif num == 2:
             # del request.session['weight_value']
-            vvv = cache.get('tetet', 0)
-
             con = get_redis_connection("default")
-
             u = User.objects.filter(last_name=equipment_last_name)
             context = {
-                'test': request.session['weight_value'],
+                # 'test': request.session['weight_value'],
                 'test2': cache.get('tetet', 0),
                 'test3': zip([k.decode('utf-8') for k in con.hkeys('asdf12')],
                              [k.decode('utf-8') for k in con.hvals('asdf12')]),
                 'test4': u,
                 'test5': [k.username for k in u],
             }
-        elif num == 3:
+        elif num == 3:  # menu_3
             errors_num = Error.objects.all().count()
             items = Error.objects.order_by()
             context = {
