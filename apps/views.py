@@ -44,6 +44,7 @@ def mainpage_menuselect(request,num):
 
             equipment = User.objects.filter(last_name=equipment_last_name)
             equipment_names = [u.username for u in equipment]
+            # equipment_names = ['프레스',1,2,3,4,4,5,6,7,8,9]
             orders = [k%4+1 for k in range(len(equipment_names))]
             con = get_redis_connection('default')
             item_of_list = []
@@ -56,7 +57,7 @@ def mainpage_menuselect(request,num):
                             orders,
                             item_of_list),
             }
-        elif num == 2:
+        elif num == 2:  #menu2
             # del request.session['weight_value']
             con = get_redis_connection("default")
             u = User.objects.filter(last_name=equipment_last_name)
