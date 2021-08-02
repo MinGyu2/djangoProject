@@ -9,4 +9,7 @@ urlpatterns = [
     path('delete/', views.user_del, name='user_del'),
     path('onesearch/', views.one_search_user_id, name='user_one_search'),
     path('allsearch/', views.all_search_user_id, name='user_all_search'),
+    path('datarecive/', views.menu1_receive_data, name='menu1_data_receive'),
+    path('errorreceive/', views.receive_error_data, name='receive_error_data'),
+    path('onlyloginvalue/', views.only_login_value, name='only_login_value'),
 ]

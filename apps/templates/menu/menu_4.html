@@ -32,6 +32,7 @@
 {# ############################################################ #}
 
 {######################## 삭제 ##################################}
+<div style="clear: left;">
 <form method="post" id="form_user_delete">
     {% csrf_token %}
     <div class="form_delete_data">
@@ -48,6 +49,7 @@
     </div>
 </div>
 {% endif %}
+</div>
 {# ############################################################ #}
 
 {# ##########################조회############################# #}
@@ -62,7 +64,7 @@
         <button id="one_user_search_bt" class="btn btn-primary" style="width: 100%;">조회</button>
     </div>
     <div class="form_one_user_search" style="width: 66.4%;">
-        {% if one_user != null %}
+        {% if one_msg == null and one_user != null %}
             <div class = "alert alert-danger" style="margin-bottom: 0px;width: 100%;height: 50px">
                 <div style="width: 33.3%;height: 100%; float: left; text-align: center">{{ one_user_info_order.0 }} : {{ one_user }}</div>
                 <div style="width: 33.3%;height: 100%; float: left; text-align: center">{{ one_user_info_order.1 }} : {{ one_user.last_name }}</div>
@@ -87,11 +89,13 @@
         {% endfor %}
     </div>
     {% for u in user_all_id %}
+        {% if not u.last_name in no_login_lastname %}
         <div class = "alert alert-danger" style="height: 50px">
             <div style="width: 33.3%;height: 100%; float: left; text-align: center">{{ u }}</div>
             <div style="width: 33.3%;height: 100%; float: left; text-align: center">{{ u.last_name }}</div>
             <div style="width: 33.3%;height: 100%; float: left; text-align: center">{{ u.email }}</div>
         </div>
+        {% endif %}
     {% endfor %}
 </div>
 {% endif %}

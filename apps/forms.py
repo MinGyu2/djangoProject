@@ -9,6 +9,3 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2', 'email', 'last_name')
-
-class UserDelForm(forms.Form):
-    name = forms.CharField()

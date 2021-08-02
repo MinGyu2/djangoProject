@@ -1,11 +1,11 @@
 <div class="menu_view">
     {% for name,num,items in list %}
-    <div class="facility_{{ num }}">
-        <div class="facility_title">{{ name }}</div>
-        {% for item in items %}
-        <div class="facility_list_name">{{ item.0 }}</div>
-        <div class="facility_list_value">{{ item.1 }} </div>
-        {% endfor %}
-    </div>
+        <div class="facility_{{ num }}" style="border-top: 1px solid #000000;">
+            <div class="facility_title">{{ name }}</div>
+            {% for item in items %}
+                <div class="facility_list_name">{{ item.0 }}</div>
+                <div class="facility_list_value">{{ item.1 }} </div>
+            {% endfor %}
+        </div>
     {% endfor %}
 </div>
