@@ -49,8 +49,8 @@ def mainpage_menuselect(request,num):
             con = get_redis_connection('default')
             item_of_list = []
             for eq in equipment_names:
-                zips = zip([k.decode('utf-8') for k in con.hkeys(eq)][4:],
-                           [k.decode('utf-8') for k in con.hvals(eq)][4:])
+                zips = zip([k.decode('utf-8') for k in con.hkeys(eq)],
+                           [k.decode('utf-8') for k in con.hvals(eq)])
                 item_of_list.append([(key, val) for key, val in zips])
             context = {
                 'list': zip(equipment_names,
@@ -140,6 +140,7 @@ def one_search_user_id(request):
     else:
         return HttpResponse("error")
 
+
 def all_search_user_id(request):
     if request.user.is_authenticated:
         users = User.objects.all()
@@ -151,9 +152,16 @@ def all_search_user_id(request):
         return render(request, 'menu/menu_4.html', context=context)
     else:
         return HttpResponse("error")
-#----------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------
 
-#-----------------------menu_1 post로 data 받기-----------------------------------
+
+# -----------------------menu_1 post로 data 받기-----------------------------------
+
+
+# 캐시에 저장 제외
+not_store_in_cache = ['csrfmiddlewaretoken', 'user_id', 'user_pwd', 'equipment_name']
+
+
 def menu1_receive_data(request):
     if request.method == "POST":
         form = request.POST
@@ -167,15 +175,15 @@ def menu1_receive_data(request):
         eq_names = [u.username for u in User.objects.filter(last_name=equipment_last_name)]
         if user is not None and equipment_name in eq_names: # user인지 검사 and 존재하는 장비인지 확인
             con = get_redis_connection("default")
-            h = {a: b for a, b in form.items()}
+            h = {key: value for key, value in form.items() if key not in not_store_in_cache}
             con.delete(equipment_name)
             con.hmset(equipment_name, h)
-            return HttpResponse(str(user) + " success! " +str(type(h)))
+            return HttpResponse(str(user) + " success! ")
         else:
             return HttpResponse("not_user or no_equipment_name")
     else:
         return HttpResponse("잘못된 접근")
-#-----------------------------------------------------------------------------
+# -----------------------menu_1 post로 data 받기-----------------------------------
 
 #----------------------error 전송 받기-----------------------------------------
 def receive_error_data(request):
