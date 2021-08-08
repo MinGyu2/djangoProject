@@ -1,13 +1,31 @@
-menu2<br>
-{#test : {{ test }}<br><br>#}
-{#test2 : {{ test2 }}<br><br>#}
-{#test3 : <br>#}
-{#{% for key, v in test3 %}#}
-{#    {{ key }} : {{ v }}<br>#}
-{#{% endfor %}#}
-{#<br>#}
-{#test4 :#}
-{#{% for user in test4 %}#}
-{#    {{ user.username }}<br>#}
-{#{% endfor %}#}
-{#{{ test5 }}#}
+<div class="square" >
+    <canvas id="myCanvas" style="position: absolute;width: 100%;height: 100%;"></canvas>
+</div>
+<script>
+    $(document).ready(function (){
+        const canvas = $("#myCanvas")[0];
+        const ctx = canvas.getContext('2d');
+
+        w = 30;
+        h = 40;
+
+        x = canvas.width/8 + canvas.width/4*0;
+        y = canvas.height/4;
+        ctx.fillStyle = 'rgb(0,0,0)';
+        ctx.fillRect(x-w/2, y-h/2, w, h);
+        x = canvas.width/8 + canvas.width/4*1;
+        ctx.fillRect(x-w/2, y-h/2, w, h);
+        x = canvas.width/8 + canvas.width/4*2;
+        ctx.fillRect(x-w/2, y-h/2, w, h);
+        x = canvas.width/8 + canvas.width/4*3;
+        ctx.fillRect(x-w/2, y-h/2, w, h);
+
+        ctx.beginPath();
+        ctx.fillStyle = 'rgb(255,0,0)';
+		ctx.arc(canvas.width/2, canvas.height/2, 3, 0, 2* Math.PI);
+		{#ctx.arc(0, 0, 3, 0, 2* Math.PI);#}
+		ctx.lineWidth = 0;
+		ctx.fill()
+		ctx.closePath();
+    })
+</script>

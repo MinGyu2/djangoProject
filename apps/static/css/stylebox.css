@@ -154,4 +154,17 @@
     padding-bottom: 20px;
 }
 /*************************/
-/*menu3 css*/
+/*menu2 css 정사각형*/
+.square {
+    position: relative;
+    width: 80%;
+    margin:auto;
+    margin-top: 10px;
+    border: 1px solid #000000;
+}
+.square:after{
+    content: "";
+    display: block;
+    padding-bottom: 5%;
+    padding-top: 50%;
+}
