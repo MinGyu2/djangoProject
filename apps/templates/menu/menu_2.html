@@ -1,31 +1,67 @@
 <div class="square" >
-    <canvas id="myCanvas" style="position: absolute;width: 100%;height: 100%;"></canvas>
+    <canvas id="myCanvas" style="position: absolute;width: 100%;height: 100%;border: 1px solid #000000;"></canvas>
 </div>
 <script>
     $(document).ready(function (){
-        const canvas = $("#myCanvas")[0];
-        const ctx = canvas.getContext('2d');
+        drawCanvas={
+		    calldraw:function (){
+		        const canvas = $("#myCanvas")[0];
+                const ctx = canvas.getContext('2d');
 
-        w = 30;
-        h = 40;
+                /////////////////////blur 되는거 없앰 즉 해상도 자동 조절////////////////////////////////
+                {#wWidth = $(window).width();#}
+                {#wHeight = $(window).height();#}
+                wWidth = canvas.clientWidth;
+                wHeight = canvas.clientHeight;
+                {#wWidth = canvas.offsetWidth;#}
+                {#wHeight = canvas.offsetHeight;#}
 
-        x = canvas.width/8 + canvas.width/4*0;
-        y = canvas.height/4;
-        ctx.fillStyle = 'rgb(0,0,0)';
-        ctx.fillRect(x-w/2, y-h/2, w, h);
-        x = canvas.width/8 + canvas.width/4*1;
-        ctx.fillRect(x-w/2, y-h/2, w, h);
-        x = canvas.width/8 + canvas.width/4*2;
-        ctx.fillRect(x-w/2, y-h/2, w, h);
-        x = canvas.width/8 + canvas.width/4*3;
-        ctx.fillRect(x-w/2, y-h/2, w, h);
+                devicePixelRatio = window.devicePixelRatio || 1,
+                backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
+                 ctx.mozBackingStorePixelRatio ||
+                 ctx.msBackingStorePixelRatio ||
+                 ctx.oBackingStorePixelRatio ||
+                 ctx.backingStorePixelRatio || 1,
+                ratio = devicePixelRatio / backingStoreRatio;
 
-        ctx.beginPath();
-        ctx.fillStyle = 'rgb(255,0,0)';
-		ctx.arc(canvas.width/2, canvas.height/2, 3, 0, 2* Math.PI);
-		{#ctx.arc(0, 0, 3, 0, 2* Math.PI);#}
-		ctx.lineWidth = 0;
-		ctx.fill()
-		ctx.closePath();
+                // style의 width, height 지정
+                {#canvas.style.width = wWidth + 'px';#}
+                {#canvas.style.height = wHeight + 'px';#}
+
+                // attribute에 ratio 값을 곱한 width, height 지정
+                canvas.width = wWidth * ratio;
+                canvas.height = wHeight * ratio;
+
+                // context scale 지정
+                ctx.scale(ratio, ratio);
+
+                /////////////////////////////////////////////////////////////////////
+                siz = 1000/(wWidth)
+                w = 70/siz;
+                h = 100/siz;
+                r = 10/siz;
+
+                x = canvas.width/8 + canvas.width/4*0;
+                y = canvas.height/4;
+                ctx.fillStyle = 'rgb(0,0,0)';
+                ctx.fillRect(x-w/2, y-h/2, w, h);
+                x = canvas.width/8 + canvas.width/4*1;
+                ctx.fillRect(x-w/2, y-h/2, w, h);
+                x = canvas.width/8 + canvas.width/4*2;
+                ctx.fillRect(x-w/2, y-h/2, w, h);
+                x = canvas.width/8 + canvas.width/4*3;
+                ctx.fillRect(x-w/2, y-h/2, w, h);
+
+                ctx.beginPath();
+                ctx.fillStyle = 'rgb(255,0,0)';
+                ctx.arc(canvas.width/2, canvas.height/2, r, 0, 2* Math.PI);
+                {#ctx.arc(0, 0, 3, 0, 2* Math.PI);#}
+                ctx.lineWidth = 0;
+                ctx.fill()
+                ctx.closePath()
+            }
+        };
+        drawCanvas.calldraw();
+		$(window).resize(drawCanvas.calldraw);
     })
 </script>
