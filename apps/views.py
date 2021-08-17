@@ -74,7 +74,7 @@ def mainpage_menuselect(request,num):
             items = Error.objects.order_by()
             context = {
                 'errors_num': errors_num,
-                'items': items,
+                'items': reversed(items),
             }
         return render(request, 'menu/menu_'+str(num)+'.html', context=context)
     else:
