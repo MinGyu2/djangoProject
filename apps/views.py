@@ -225,3 +225,46 @@ def only_login_value(request):
     else:
         return Http404("잘못된 접근")
 #------------------------------------------------------------------------------------
+
+#------------------
+import numpy as np
+def trilateration_rssi(request):
+    if request.method == "POST":
+        form = request.POST
+        # user 인지 검사
+        # s = form['user_id']
+        # p = form['user_pwd']
+        # user = authenticate(username=s, password=p)
+        if request.user.is_authenticated:
+            d1 = float(form['d1'])
+            d2 = float(form['d2'])
+            d3 = float(form['d3'])
+            d4 = float(form['d4'])
+            #설비
+            b = (lambda x1,y1,x2,y2,d1,d2:[x1**2-x2**2 +y1**2-y2**2 +d2**2-d1**2])
+            a = (lambda x1,y1,x2,y2:[x1-x2,y1-y2])
+
+            A = []
+            A.append(a(0,0,0,2))
+            A.append(a(0,2,2,0))
+            A.append(a(2,0,0,0))
+            A.append(a(2,2,0,0))
+
+            B = []
+            B.append(b(0,0,0,2,d1,d2))
+            B.append(b(0,2,2,0,d3,d2))
+            B.append(b(2,0,0,0,d3,d1))
+            B.append(b(2,2,0,0,d4,d1))
+
+            A = np.array(A)
+            B = np.array(B)
+            # A = (lambda x1,y1,x2,y2,x3,y3:np.array([[x1-x2,y1-y2],[x2-x3,y2-y3],[x3-x1,y3-y1]]))
+            # B = (lambda x1,y1,x2,y2,x3,y3,d1,d2,d3:np.array([b(x1,y1,x2,y2,d1,d2), b(x2,y2,x3,y3,d2,d3), b(x3,y3,x1,y1,d3,d1)]))
+            # A = A(0, 0, 0, 2, 2, 0)
+            # B = B(0, 0, 0, 2, 2, 0, 1, 2, 3)
+            return HttpResponse(""+str(np.linalg.inv(A.T@A)@A.T@B))
+        else:
+            return HttpResponse("fail2")
+    else:
+        return Http404("잘못된 접근")
+#-----------------------------------------------------------------------------------

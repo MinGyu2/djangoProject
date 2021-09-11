@@ -12,4 +12,5 @@ urlpatterns = [
     path('datarecive/', views.menu1_receive_data, name='menu1_data_receive'),
     path('errorreceive/', views.receive_error_data, name='receive_error_data'),
     path('onlyloginvalue/', views.only_login_value, name='only_login_value'),
+    path('trilateration_rssi/', views.trilateration_rssi, name='trilateration_rssi'),
 ]
