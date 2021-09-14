@@ -14,6 +14,8 @@ menu_list = ['설비 조회', '관리자 위치', '에러 로그', '직원 DB']
 
 no_login_lastname = ['factory_machinery']
 equipment_last_name = 'factory_machinery'
+
+
 #---------------- main page --------------------------
 def mainpage(request):
     if request.user.is_authenticated:
@@ -29,6 +31,7 @@ def mainpage(request):
     else:
         return redirect('login')    # common 의 urls login 부분 의 이름
 #-----------------------------------------------------
+
 
 #---------------menu----------------------------------
 def mainpage_menuselect(request,num):
@@ -232,10 +235,10 @@ def trilateration_rssi(request):
     if request.method == "POST":
         form = request.POST
         # user 인지 검사
-        # s = form['user_id']
-        # p = form['user_pwd']
-        # user = authenticate(username=s, password=p)
-        if request.user.is_authenticated:
+        s = form['user_id']
+        p = form['user_pwd']
+        user = authenticate(username=s, password=p)
+        if user is not None:#request.user.is_authenticated:
             d1 = float(form['d1'])
             d2 = float(form['d2'])
             d3 = float(form['d3'])
