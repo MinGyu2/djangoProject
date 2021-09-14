@@ -255,7 +255,7 @@ def trilateration_rssi(request):
 
             B = []
             B.append(b(0,0,0,2,d1,d2))
-            B.append(b(0,2,2,0,d3,d2))
+            B.append(b(0,2,2,0,d2,d3))
             B.append(b(2,0,0,0,d3,d1))
             B.append(b(2,2,0,0,d4,d1))
 
