@@ -265,7 +265,8 @@ def trilateration_rssi(request):
             # B = (lambda x1,y1,x2,y2,x3,y3,d1,d2,d3:np.array([b(x1,y1,x2,y2,d1,d2), b(x2,y2,x3,y3,d2,d3), b(x3,y3,x1,y1,d3,d1)]))
             # A = A(0, 0, 0, 2, 2, 0)
             # B = B(0, 0, 0, 2, 2, 0, 1, 2, 3)
-            return HttpResponse(""+str(np.linalg.inv(A.T@A)@A.T@B))
+            rt = str(np.linalg.inv(A.T@A)@A.T@B).replace('[','').replace(']','').replace('\n',',')
+            return HttpResponse(""+rt)
         else:
             return HttpResponse("fail2")
     else:
