@@ -248,17 +248,50 @@ def trilateration_rssi(request):
             a = (lambda x1,y1,x2,y2:[x1-x2,y1-y2])
 
             A = []
-            A.append(a(0,0,0,2))
-            A.append(a(0,2,2,0))
-            A.append(a(2,0,0,0))
-            A.append(a(2,2,0,0))
-
             B = []
-            B.append(b(0,0,0,2,d1,d2))
-            B.append(b(0,2,2,0,d2,d3))
-            B.append(b(2,0,0,0,d3,d1))
-            B.append(b(2,2,0,0,d4,d1))
 
+            # A.append(a(0, 0, 0, 2))
+            # A.append(a(0, 2, 2, 0))
+            # A.append(a(2, 0, 0, 0))
+            # A.append(a(2, 2, 0, 0))
+            #
+            # B.append(b(0, 0, 0, 2, d1, d2))
+            # B.append(b(0, 2, 2, 0, d2, d3))
+            # B.append(b(2, 0, 0, 0, d3, d1))
+            # B.append(b(2, 2, 0, 0, d4, d1))
+
+            if d1 >= d2 and d1 >= d3 and d1 >= d4:
+                A.append(a(0, 2, 2, 0))
+                A.append(a(2, 0, 2, 2))
+                A.append(a(2, 2, 0, 2))
+
+                B.append(b(0, 2, 2, 0, d2, d3))
+                B.append(b(2, 0, 2, 2, d3, d4))
+                B.append(b(2, 2, 0, 2, d4, d2))
+            elif d2 >= d1 and d2 >= d3 and d2 >= d4:
+                A.append(a(0, 0, 2, 0))
+                A.append(a(2, 0, 2, 2))
+                A.append(a(2, 2, 0, 0))
+
+                B.append(b(0, 0, 2, 0, d1, d3))
+                B.append(b(2, 0, 2, 2, d3, d4))
+                B.append(b(2, 2, 0, 0, d4, d1))
+            elif d3 >= d1 and d3 >= d2 and d3 >= d4:
+                A.append(a(0, 0, 0, 2))
+                A.append(a(0, 2, 2, 2))
+                A.append(a(2, 2, 0, 0))
+
+                B.append(b(0, 0, 0, 2, d1, d2))
+                B.append(b(0, 2, 2, 2, d2, d4))
+                B.append(b(2, 2, 0, 0, d4, d1))
+            elif d4 >= d1 and d4 >= d2 and d4 >= d3:
+                A.append(a(0, 0, 0, 2))
+                A.append(a(0, 2, 2, 0))
+                A.append(a(2, 0, 0, 0))
+
+                B.append(b(0, 0, 0, 2, d1, d2))
+                B.append(b(0, 2, 2, 0, d2, d3))
+                B.append(b(2, 0, 0, 0, d3, d1))
             A = np.array(A)
             B = np.array(B)
             # A = (lambda x1,y1,x2,y2,x3,y3:np.array([[x1-x2,y1-y2],[x2-x3,y2-y3],[x3-x1,y3-y1]]))
