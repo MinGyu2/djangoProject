@@ -13,4 +13,5 @@ urlpatterns = [
     path('errorreceive/', views.receive_error_data, name='receive_error_data'),
     path('onlyloginvalue/', views.only_login_value, name='only_login_value'),
     path('trilateration_rssi/', views.trilateration_rssi, name='trilateration_rssi'),
+    path('setuserlocation/', views.change_user_location, name='change_user_location'),
 ]

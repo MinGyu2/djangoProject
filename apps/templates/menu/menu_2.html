@@ -37,27 +37,38 @@
 
                 /////////////////////////////////////////////////////////////////////
                 siz = 1000/(wWidth)
-                w = 70/siz;
-                h = 100/siz;
+                w = 100/siz;
+                h = 70/siz;
                 r = 10/siz;
 
-                x = canvas.width/8 + canvas.width/4*0;
+                // 글자 사이즈 + 폰트
+                ctx.font = canvas.width/40+'px Cafe24Ssurround';
+
+                x = canvas.width/8 + canvas.width/4*0;  // 차체 조립
                 y = canvas.height/4;
+                ctx.fillStyle = 'rgb(0,0,255)';
+                ctx.fillText('차체조립', x-w/2, y-h/2,w);
                 ctx.fillStyle = 'rgb(0,0,0)';
                 ctx.fillRect(x-w/2, y-h/2, w, h);
 
-                x = canvas.width/8 + canvas.width/4*0;
+                x = canvas.width/8 + canvas.width/4*0;  // 프레스
                 y = canvas.height/4 + canvas.height/4*2;
+                ctx.fillStyle = 'rgb(0,0,255)';
+                ctx.fillText('프레스', x-w/2, y-h/2,);
                 ctx.fillStyle = 'rgb(0,0,0)';
                 ctx.fillRect(x-w/2, y-h/2, w, h);
 
-                x = canvas.width/8 + canvas.width/4*3;
+                x = canvas.width/8 + canvas.width/4*3;  // 도장
                 y = canvas.height/4;
+                ctx.fillStyle = 'rgb(0,0,255)';
+                ctx.fillText('도장', x-w/2, y-h/2,);
                 ctx.fillStyle = 'rgb(0,0,0)';
                 ctx.fillRect(x-w/2, y-h/2, w, h);
 
-                x = canvas.width/8 + canvas.width/4*3;
+                x = canvas.width/8 + canvas.width/4*3;  // 의장
                 y = canvas.height/4 + canvas.height/4*2;
+                ctx.fillStyle = 'rgb(0,0,255)';
+                ctx.fillText('의장', x-w/2, y-h/2,);
                 ctx.fillStyle = 'rgb(0,0,0)';
                 ctx.fillRect(x-w/2, y-h/2, w, h);
 

@@ -64,13 +64,13 @@ def mainpage_menuselect(request,num):
             # del request.session['weight_value']
             con = get_redis_connection("default")
             u = User.objects.filter(last_name=equipment_last_name)
+
+            location = zip([k.decode('utf-8') for k in con.hkeys('location')],
+                           [k.decode('utf-8') for k in con.hvals('location')])
+            ll = []
+            ll.append(val for key, val in location)
             context = {
-                # 'test': request.session['weight_value'],
-                'test2': cache.get('tetet', 0),
-                'test3': zip([k.decode('utf-8') for k in con.hkeys('asdf12')],
-                             [k.decode('utf-8') for k in con.hvals('asdf12')]),
-                'test4': u,
-                'test5': [k.username for k in u],
+                'tt2': ll,
             }
         elif num == 3:  # menu_3
             errors_num = Error.objects.all().count()
@@ -82,6 +82,26 @@ def mainpage_menuselect(request,num):
         return render(request, 'menu/menu_'+str(num)+'.html', context=context)
     else:
         return redirect('login')
+#-----------------------------------------------------
+
+#---------------------위치 변경------------------------
+def change_user_location(request):
+    if request.method == "POST":
+        form = request.POST
+        # user 인지 검사
+        s = form['user_id']
+        p = form['user_pwd']
+        user = authenticate(username=s, password=p)
+        if user is not None:  # request.user.is_authenticated:
+            ll = form['location']
+            con = get_redis_connection("default")
+            con.delete("user_location")
+            con.hmset("user_location", {'user': ll, })
+            return HttpResponse("ss")
+        else:
+            return HttpResponse("fail2")
+    else:
+        return Http404("잘못된 접근")
 #-----------------------------------------------------
 
 #----------------- menu4 user delete,sign,search ---------------------------
