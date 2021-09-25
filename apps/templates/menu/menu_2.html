@@ -43,41 +43,86 @@
 
                 // 글자 사이즈 + 폰트
                 ctx.font = canvas.width/40+'px Cafe24Ssurround';
+                // 글자 위치
+                spot_x = w/30;
+                spot_y = w/5*2;
+
 
                 x = canvas.width/8 + canvas.width/4*0;  // 차체 조립
                 y = canvas.height/4;
+                ctx.strokeStyle = 'rgb(0,0,0)';
+                ctx.lineWidth = w/30;
+                ctx.strokeRect(x-w/2, y-h/2, w, h);
+
                 ctx.fillStyle = 'rgb(0,0,255)';
-                ctx.fillText('차체조립', x-w/2, y-h/2,w);
-                ctx.fillStyle = 'rgb(0,0,0)';
-                ctx.fillRect(x-w/2, y-h/2, w, h);
+                ctx.fillText('차체조립', x-w/2+spot_x, y-h/2+spot_y,w);
+
+
 
                 x = canvas.width/8 + canvas.width/4*0;  // 프레스
                 y = canvas.height/4 + canvas.height/4*2;
+                ctx.strokeStyle = 'rgb(0,0,0)';
+                ctx.lineWidth = w/30;
+                ctx.strokeRect(x-w/2, y-h/2, w, h);
+
                 ctx.fillStyle = 'rgb(0,0,255)';
-                ctx.fillText('프레스', x-w/2, y-h/2,);
-                ctx.fillStyle = 'rgb(0,0,0)';
-                ctx.fillRect(x-w/2, y-h/2, w, h);
+                ctx.fillText('프레스', x-w/2+spot_x, y-h/2+spot_y,w);
+
+
 
                 x = canvas.width/8 + canvas.width/4*3;  // 도장
                 y = canvas.height/4;
+                ctx.strokeStyle = 'rgb(0,0,0)';
+                ctx.lineWidth = w/30;
+                ctx.strokeRect(x-w/2, y-h/2, w, h);
+
                 ctx.fillStyle = 'rgb(0,0,255)';
-                ctx.fillText('도장', x-w/2, y-h/2,);
-                ctx.fillStyle = 'rgb(0,0,0)';
-                ctx.fillRect(x-w/2, y-h/2, w, h);
+                ctx.fillText('도장', x-w/2+spot_x, y-h/2+spot_y,w);
+
+
+
 
                 x = canvas.width/8 + canvas.width/4*3;  // 의장
                 y = canvas.height/4 + canvas.height/4*2;
+                ctx.strokeStyle = 'rgb(0,0,0)';
+                ctx.lineWidth = w/30;
+                ctx.strokeRect(x-w/2, y-h/2, w, h);
                 ctx.fillStyle = 'rgb(0,0,255)';
-                ctx.fillText('의장', x-w/2, y-h/2,);
-                ctx.fillStyle = 'rgb(0,0,0)';
-                ctx.fillRect(x-w/2, y-h/2, w, h);
+                ctx.fillText('의장', x-w/2+spot_x, y-h/2+spot_y,w);
 
+
+
+                user_spot_x = w/10;
+                user_spot_y = w/10;
                 ctx.beginPath();
-                ctx.fillStyle = 'rgb(255,0,0)';
-                ctx.arc(canvas.width/2, canvas.height/2, r, 0, 2* Math.PI);
-                {#ctx.arc(0, 0, 3, 0, 2* Math.PI);#}
-                ctx.lineWidth = 0;
-                ctx.fill()
+                {% for mm in tt2%}
+                    {% if mm.1 == "차체조립" %}
+                        user_location_x = -w*3;
+                        user_location_y = -h*3;
+                    {% elif mm.1 == "도장" %}
+                        user_location_x = w*3;
+                        user_location_y = -h*3;
+                    {% elif mm.1 == "프레스" %}
+                        user_location_x = -w*3;
+                        user_location_y = h*3;
+                    {% elif mm.1 == "의장" %}
+                        user_location_x = w*3;
+                        user_location_y = h*3;
+                    {% else %}
+                        user_location_x = 0;
+                        user_location_y = h*3.5;
+                    {% endif %}
+
+                    ctx.fillStyle = 'rgb(0,0,255)';
+                    ctx.fillText('{{ mm.0 }}', canvas.width/2+user_spot_x +user_location_x, canvas.height/2+user_spot_y +user_location_y,);
+
+                    ctx.fillStyle = 'rgb(255,0,0)';
+                    ctx.arc(canvas.width/2 + user_location_x, canvas.height/2+user_location_y, r, 0, 2* Math.PI);
+                    ctx.lineWidth = 0;
+                    ctx.fill()
+                {% endfor %}
+
+
                 ctx.closePath()
             }
         };

@@ -63,12 +63,13 @@ def mainpage_menuselect(request,num):
         elif num == 2:  #menu2
             # del request.session['weight_value']
             con = get_redis_connection("default")
-            u = User.objects.filter(last_name=equipment_last_name)
 
-            location = zip([k.decode('utf-8') for k in con.hkeys('location')],
-                           [k.decode('utf-8') for k in con.hvals('location')])
+            location = zip([k.decode('utf-8') for k in con.hkeys('user_location')],
+                           [k.decode('utf-8') for k in con.hvals('user_location')])
+
             ll = []
-            ll.append(val for key, val in location)
+            for key, val in location:
+                ll.append((key, val))
             context = {
                 'tt2': ll,
             }
@@ -96,7 +97,7 @@ def change_user_location(request):
             ll = form['location']
             con = get_redis_connection("default")
             con.delete("user_location")
-            con.hmset("user_location", {'user': ll, })
+            con.hmset("user_location", {s: ll,})
             return HttpResponse("ss")
         else:
             return HttpResponse("fail2")
